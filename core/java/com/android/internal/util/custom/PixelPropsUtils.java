@@ -40,6 +40,7 @@ public class PixelPropsUtils {
             "com.android.vending",
             "com.google.android.apps.gcs",
             "com.google.android.apps.turbo",
+            "com.google.android.apps.turboadapter",
             "com.google.android.apps.wellbeing",
             "com.google.android.configupdater",
             "com.google.android.gms",
@@ -53,7 +54,8 @@ public class PixelPropsUtils {
             "com.google.android.pixel.setupwizard",
             "com.google.android.apps.messaging",
             "com.google.android.apps.photos",
-            "com.google.android.apps.maps"
+            "com.google.android.apps.maps",
+            "com.google.android.apps.fitness"
     };
 
     static {
@@ -63,11 +65,7 @@ public class PixelPropsUtils {
         propsToChange.put("DEVICE", "redfin");
         propsToChange.put("PRODUCT", "redfin");
         propsToChange.put("MODEL", "Pixel 5");
-        propsToChange.put("IS_DEBUGGABLE", false);
-        propsToChange.put("IS_ENG", false);
-        propsToChange.put("IS_USERDEBUG", false);
-        propsToChange.put("IS_USER", true);
-        propsToChange.put("TYPE", "user");
+        propsToChange.put("FINGERPRINT", "google/redfin/redfin:11/RQ3A.210705.001/7380771:user/release-keys");
     }
 
     public static void setProps(String packageName) {
@@ -86,6 +84,10 @@ public class PixelPropsUtils {
                 }
                 setPropValue(key, value);
             }
+        }
+        // Set proper indexing fingerprint
+        if (packageName.equals("com.google.android.settings.intelligence")){
+            setPropValue("FINGERPRINT", Build.DATE);
         }
     }
 
